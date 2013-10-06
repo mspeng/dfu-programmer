@@ -327,7 +327,7 @@ int32_t atmel_read_fuses( dfu_device_t *device,
         return -1;
     }
 
-    if( GRP_AVR & device->type ) {
+    if( !(ADC_AVR32 & device->type) ) {
         DEBUG( "target does not support fuse operation.\n" );
         fprintf( stderr, "target does not support fuse operation.\n" );
         return -1;
@@ -375,19 +375,19 @@ int32_t atmel_read_config( dfu_device_t *device,
      */
     static const atmel_read_config_t data[] = {
         { 0x00, 0x00, (ADC_8051 | ADC_AVR), offsetof(atmel_device_info_t, bootloaderVersion) },
-        { 0x04, 0x00, (ADC_AVR32),          offsetof(atmel_device_info_t, bootloaderVersion) },
+        { 0x04, 0x00, (ADC_AVR32 | ADC_XMEGA), offsetof(atmel_device_info_t, bootloaderVersion) },
         { 0x00, 0x01, (ADC_8051 | ADC_AVR), offsetof(atmel_device_info_t, bootID1)           },
-        { 0x04, 0x01, (ADC_AVR32),          offsetof(atmel_device_info_t, bootID1)           },
+        { 0x04, 0x01, (ADC_AVR32 | ADC_XMEGA), offsetof(atmel_device_info_t, bootID1)           },
         { 0x00, 0x02, (ADC_8051 | ADC_AVR), offsetof(atmel_device_info_t, bootID2)           },
-        { 0x04, 0x02, (ADC_AVR32),          offsetof(atmel_device_info_t, bootID2)           },
+        { 0x04, 0x02, (ADC_AVR32 | ADC_XMEGA), offsetof(atmel_device_info_t, bootID2)           },
         { 0x01, 0x30, (ADC_8051 | ADC_AVR), offsetof(atmel_device_info_t, manufacturerCode)  },
-        { 0x05, 0x00, (ADC_AVR32),          offsetof(atmel_device_info_t, manufacturerCode)  },
+        { 0x05, 0x00, (ADC_AVR32 | ADC_XMEGA), offsetof(atmel_device_info_t, manufacturerCode)  },
         { 0x01, 0x31, (ADC_8051 | ADC_AVR), offsetof(atmel_device_info_t, familyCode)        },
-        { 0x05, 0x01, (ADC_AVR32),          offsetof(atmel_device_info_t, familyCode)        },
+        { 0x05, 0x01, (ADC_AVR32 | ADC_XMEGA), offsetof(atmel_device_info_t, familyCode)        },
         { 0x01, 0x60, (ADC_8051 | ADC_AVR), offsetof(atmel_device_info_t, productName)       },
-        { 0x05, 0x02, (ADC_AVR32),          offsetof(atmel_device_info_t, productName)       },
+        { 0x05, 0x02, (ADC_AVR32 | ADC_XMEGA), offsetof(atmel_device_info_t, productName)       },
         { 0x01, 0x61, (ADC_8051 | ADC_AVR), offsetof(atmel_device_info_t, productRevision)   },
-        { 0x05, 0x03, (ADC_AVR32),          offsetof(atmel_device_info_t, productRevision)   },
+        { 0x05, 0x03, (ADC_AVR32 | ADC_XMEGA), offsetof(atmel_device_info_t, productRevision)   },
         { 0x01, 0x00, ADC_8051,             offsetof(atmel_device_info_t, bsb)               },
         { 0x01, 0x01, ADC_8051,             offsetof(atmel_device_info_t, sbv)               },
         { 0x01, 0x05, ADC_8051,             offsetof(atmel_device_info_t, ssb)               },
@@ -493,7 +493,7 @@ int32_t atmel_set_fuse( dfu_device_t *device,
         return -1;
     }
 
-    if( GRP_AVR & device->type ) {
+    if( !(ADC_AVR32 & device->type) ) {
        DEBUG( "target does not support fuse operation.\n" );
        fprintf( stderr, "target does not support fuse operation.\n" );
        return -1;

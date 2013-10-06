@@ -1,3 +1,12 @@
+2013-09-09 Mark Peng
+    * src/atmel.c src/commands.c
+      Disallow fuse-related operations except for ADC_AVR32 (UC3).
+      Added ADC_XMEGA entries to table that maps where to get certain
+      configuration parameters. Fixed dump-eeprom for ADC_XMEGA and
+      ADC_AVR32 by selecting the eeprom memory unit. Fixed flash-eeprom
+      for ADC_XMEGA and ADC_AVR32 by correcting the program start command
+      after the correct memory unit is selected.
+
 2013-07-18 Simon Large
     * src/arguments.c
       Ignore "No device found" errors due to reporting the wrong interface
